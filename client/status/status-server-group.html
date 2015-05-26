@@ -1,0 +1,8 @@
+<template name="statusServerGroup">
+    <div>
+        {{name}}
+        {{#each servers}}
+            {{> statusServer}}
+        {{/each}}
+    </div>
+</template>
