@@ -1,6 +1,13 @@
 <template name="statusServerGroup">
-    <div>
-        {{name}}
+
+    <div class="list-group">
+        <li class="list-group-item active">
+            <a href="{{pathFor route='servergroup'}}" class="list-group-item active">
+                {{name}}
+                <span class="badge">some status</span>
+            </a>
+
+        </li>
         {{#each servers}}
             {{> statusServer}}
         {{/each}}
