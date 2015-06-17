@@ -11,3 +11,4 @@ iron:router
 nemo64:bootstrap
 less
 jquery
+http

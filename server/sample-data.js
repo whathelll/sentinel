@@ -6,7 +6,7 @@ if(ServerGroups.find().count() === 0) {
     Servers.insert({
         name: 'test server 1',
         serverGroup: 'localhost',
-        url: 'http://localhost:3000/api/status'
+        url: 'http://localhost:3000/api/test/jsonstatus'
     });
 
     Servers.insert({
@@ -23,7 +23,7 @@ if(ServerGroups.find().count() === 0) {
     Servers.insert({
         name: 'test server 1',
         serverGroup: 'localhost2',
-        url: 'http://localhost:3000/api/status'
+        url: 'http://localhost:3000/api/test/jsonstatus'
     });
 
     Servers.insert({
@@ -32,4 +32,8 @@ if(ServerGroups.find().count() === 0) {
         url: 'http://localhost:3000/api/test/jsonstatus'
     });
 }
+
+
+
+
 
