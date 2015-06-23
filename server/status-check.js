@@ -15,16 +15,21 @@ var poll = function() {
             HTTP.get(server.url, {}, function (error, result) {
                 console.log(server.url);
                 if (!error) {
-                    console.log('Server:' + server.name);
-                    console.log('Status Code:' + result.statusCode);
-                    console.log('Content:' + result.content);
+                    //console.log('Server:' + server.name);
+                    //console.log('Status Code:' + result.statusCode);
+                    //console.log('Content:' + result.content);
+                    var content = JSON.parse(result.content);
+                    //set the server version
+                    Servers.update(server._id, {$set: {version: content.version || undefined}});
                 } else {
                     console.log(error);
                 }
             });
         });
     });
-    if(count++ > 3) polling = false;
+
+    //testing polling
+    if(count++ >= 2) polling = false;
     if(!polling) {
         Meteor.clearInterval(pollingTimer);
     }
@@ -32,8 +37,6 @@ var poll = function() {
 
 
 var pollingTimer = Meteor.setInterval(poll, 5000);
-
-
 
 
 
