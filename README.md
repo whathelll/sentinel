@@ -1,7 +1,10 @@
 #Install
 download and install from http://www.meteor.com
+
 clone this repository
+
 type "meteor" in the command line to start up instance
+
 "meteor reset" to reset the database
 
 #Packages used
