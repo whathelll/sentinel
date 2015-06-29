@@ -4,32 +4,45 @@ if(ServerGroups.find().count() === 0) {
     });
 
     Servers.insert({
-        name: 'test server 1',
+        name: 'test server version change',
         serverGroup: 'localhost',
-        url: 'http://localhost:3000/api/test/restful'
+        pollInterval: 14,  //no. of seconds
+        upStatus: true,
+        upStatusUrl: 'http://localhost:3000/api/test/restful',
+        upStatusMethod: "GET",  //GET or POST
+        upStatusPostHeader: undefined,
+        upStatusPostData: undefined,
+        version: "",
+        versionUrl: 'http://localhost:3000/api/test/restful',
+        lastUpdateTime: undefined
     });
 
     Servers.insert({
-        name: 'test server 2',
+        name: 'test server up down',
         serverGroup: 'localhost',
-        url: 'http://localhost:3000/api/test/restful'
-    });
-
-
-    ServerGroups.insert({
-        name: 'localhost2'
-    });
-
-    Servers.insert({
-        name: 'test server 1',
-        serverGroup: 'localhost2',
-        url: 'http://localhost:3000/api/test/restful'
+        pollInterval: 9,
+        upStatus: false,
+        upStatusUrl: 'http://localhost:3000/api/test/restfulUpDown',
+        upStatusMethod: "GET",
+        upStatusPostHeader: undefined,
+        upStatusPostData: undefined,
+        version: "",
+        versionUrl: 'http://localhost:3000/api/test/restfulUpDown',
+        lastUpdateTime: undefined
     });
 
     Servers.insert({
-        name: 'test server 2',
-        serverGroup: 'localhost2',
-        url: 'http://localhost:3000/api/test/restful'
+        name: 'test server post',
+        serverGroup: 'localhost',
+        pollInterval: 4,
+        upStatus: false,
+        upStatusUrl: 'http://localhost:3000/api/test/restful',
+        upStatusMethod: "POST",
+        upStatusPostHeader: '{"testField": "abc"}',
+        upStatusPostData: "some data to be posted",
+        version: "",
+        versionUrl: undefined,
+        lastUpdateTime: undefined
     });
 }
 

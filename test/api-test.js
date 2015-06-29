@@ -19,20 +19,30 @@ Router.map(function() {
     });
 });
 
+//alternate between versions
+var versionSwitch = true;
 Router.route('/api/test/restful', { where: 'server' })
     .get(function () {
         console.log('GET rest test api hit');
         //console.log(this.request);
         console.log('----------------------------');
         //console.log(this.response);
+        if(versionSwitch) {
+            testRestResponse.version = "1.0.6";
+        } else {
+            testRestResponse.version = "1.0.5";
+        }
+        versionSwitch = !versionSwitch;
 
         this.response.writeHead(200, {'Content-Type': 'application/json'});
         this.response.end(JSON.stringify(testRestResponse));
 
     })
     .post(function () {
+        console.log('----------------------------');
         console.log('POST rest test api hit');
-        //console.log(this.request);
+        //console.log(this.request.headers);
+        //console.log(this.request.body);
         console.log('----------------------------');
         //console.log(this.response);
 
@@ -40,6 +50,7 @@ Router.route('/api/test/restful', { where: 'server' })
         this.response.end(JSON.stringify(testRestResponse));
     })
     .put(function () {
+        console.log('----------------------------');
         console.log('PUT rest test api hit');
         //console.log(this.request);
         console.log('----------------------------');
@@ -47,4 +58,26 @@ Router.route('/api/test/restful', { where: 'server' })
 
         this.response.writeHead(200, {'Content-Type': 'application/json'});
         this.response.end(JSON.stringify(testRestResponse));
+    });
+
+
+//alternate between up and down
+var upSwitch = true;
+Router.route('/api/test/restfulUpDown', { where: 'server' })
+    .get(function () {
+        console.log('GET rest test up down api hit');
+        //console.log(this.request);
+        console.log('----------------------------');
+        //console.log(this.response);
+        if(upSwitch) {
+            this.response.writeHead(200, {'Content-Type': 'application/json'});
+            this.response.end(JSON.stringify(testRestResponse));
+        } else {
+            this.response.writeHead(404, {});
+            this.response.end("");
+        }
+        upSwitch = !upSwitch;
+
+
+
     });

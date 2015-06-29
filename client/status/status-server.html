@@ -1,7 +1,14 @@
 <template name="statusServer">
     <a class="list-group-item" href="{{url}}">
         {{name}}
-        <span class="badge">some status</span>
+        - <span>{{updateTime}}</span>
+        <span class="label upstatus {{#if upStatus}}label-success {{else}} label-danger {{/if}}">
+            {{#if upStatus}}
+                Up
+            {{else}}
+                Down
+            {{/if}}
+        </span>
         <span class="label label-info version">{{version}}</span>
     </a>
 </template>
