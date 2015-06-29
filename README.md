@@ -30,6 +30,7 @@ dev test endpoints - test/api-test.js
 - have different operations e.g. post with data and header (doesn't seem to post the body yet)
 - evaluate version with regular expression (a field on the server record)
 - set up sample data that has VE132/133
+- user accounts and subscription to server status'
 - evaluate response content rather than just look at 200 status
 
 - edit servers
