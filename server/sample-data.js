@@ -8,12 +8,13 @@ if(ServerGroups.find().count() === 0) {
         serverGroup: 'localhost',
         pollInterval: 14,  //no. of seconds
         upStatus: true,
-        upStatusUrl: 'http://localhost:3000/api/test/restful',
+        upStatusUrl: 'http://127.0.0.1:3000/api/test/restful',
         upStatusMethod: "GET",  //GET or POST
         upStatusPostHeader: undefined,
         upStatusPostData: undefined,
+        upStatusPostResultRegex: undefined,
         version: "",
-        versionUrl: 'http://localhost:3000/api/test/restful',
+        versionUrl: 'http://127.0.0.1:3000/api/test/restful',
         lastUpdateTime: undefined
     });
 
@@ -22,12 +23,13 @@ if(ServerGroups.find().count() === 0) {
         serverGroup: 'localhost',
         pollInterval: 9,
         upStatus: false,
-        upStatusUrl: 'http://localhost:3000/api/test/restfulUpDown',
+        upStatusUrl: 'http://127.0.0.1:3000/api/test/restfulUpDown',
         upStatusMethod: "GET",
         upStatusPostHeader: undefined,
         upStatusPostData: undefined,
+        upStatusPostResultRegex: undefined,
         version: "",
-        versionUrl: 'http://localhost:3000/api/test/restfulUpDown',
+        versionUrl: 'http://127.0.0.1:3000/api/test/restfulUpDown',
         lastUpdateTime: undefined
     });
 
@@ -36,14 +38,19 @@ if(ServerGroups.find().count() === 0) {
         serverGroup: 'localhost',
         pollInterval: 4,
         upStatus: false,
-        upStatusUrl: 'http://localhost:3000/api/test/restful',
+        upStatusUrl: 'http://127.0.0.1:3000/api/test/restful',
         upStatusMethod: "POST",
         upStatusPostHeader: '{"testField": "abc"}',
         upStatusPostData: "some data to be posted",
+        upStatusPostResultRegex: undefined,
         version: "",
         versionUrl: undefined,
         lastUpdateTime: undefined
     });
+
+
+
+
 }
 
 
