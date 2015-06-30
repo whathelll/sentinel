@@ -41,10 +41,19 @@ Router.route('/api/test/restful', { where: 'server' })
     .post(function () {
         console.log('----------------------------');
         console.log('POST rest test api hit');
-        //console.log(this.request.headers);
-        //console.log(this.request.body);
-        console.log('----------------------------');
+        console.log('headers');
+        console.log(this.request.headers);
+
         //console.log(this.response);
+        var body = "";
+        this.request.on('data', function (data) {
+            body += data;
+        });
+        this.request.on('end', function () {
+            console.log('body:' + body);
+            console.log('----------------------------');
+        });
+
 
         this.response.writeHead(200, {'Content-Type': 'application/json'});
         this.response.end(JSON.stringify(testRestResponse));
