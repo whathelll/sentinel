@@ -23,28 +23,41 @@ var pollServer = function(server) {
         if (!error) {
             console.log('Server:' + server.name);
             console.log('Status Code:' + result.statusCode);
-            //console.log('Content:' + result.content);
+            console.log('Content:' + result.content);
             if(server.lastUpdateTime)
                 console.log('Time since last update:' + (new Date() - server.lastUpdateTime));
 
             //var content = JSON.parse(result.content);
 
-            //server is up
-            server.upStatus = true;
+
 
             //set the server version
             if(server.upStatusUrl === server.versionUrl) {
-                var match = result.content.match(/version":"(.*)"/);
+                var match = result.content.match(/ersion":"([a-zA-Z0-9\.]+)"/);
                 if(match && match.length >= 2) {
                     server.version = match[1];
                 }
             }
+            //if post then check the result
+            if(server.upStatusMethod === "POST") {
+                console.log('testing post condition');
+                console.log('match: ' + result.content.match(server.upStatusPostResultRegex));
+                if(result.content && server.upStatusPostResultRegex) {
+                    server.upStatus = !!result.content.match(server.upStatusPostResultRegex);
+                }
+            } else {
+                //server is up
+                server.upStatus = true;
+            }
+
+
         } else {
-            //console.log(error);
-            console.log('Status Code:' + result.statusCode);
+            console.log(error);
+            console.log('error');
+            if(result  && result.statusCode) console.log('Status Code:' + result.statusCode);
             //server is down
             server.upStatus = false;
-            server.version = undefined;
+            //server.version = undefined;
         }
 
 
