@@ -16,6 +16,7 @@ Package.onUse(function(api) {
   api.export('EventBus');
 });
 
+//run with meteor test-packages packages/eventbus
 Package.onTest(function(api) {
   api.use('sentinel:eventbus');
   api.use('tinytest');
