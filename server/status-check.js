@@ -14,22 +14,15 @@ var pollServer = function(server) {
     var options = {};
     if(server.upStatusMethod == "POST") {
         options.headers = JSON.parse(server.upStatusPostHeader);
-        options.content = server.upStatusPostData;  //this seems to do nothing
+        options.content = server.upStatusPostData;
     }
 
-    //console.log(options);
     HTTP.call(server.upStatusMethod, server.upStatusUrl, options, function (error, result) {
 //        console.log(server.upStatusUrl);
         if (!error) {
-            console.log('---------------success Server:' + server.name);
+            console.log('---------------success Server:' + server.serverGroup + ' ' + server.name);
             console.log('Status Code:' + result.statusCode);
             //console.log('Content:' + result.content);
-//            if(server.lastUpdateTime)
-//                console.log('Time since last update:' + (new Date() - server.lastUpdateTime));
-
-            //var content = JSON.parse(result.content);
-
-
 
             //set the server version
             if(server.upStatusUrl === server.versionUrl) {
@@ -58,7 +51,6 @@ var pollServer = function(server) {
             if(result  && result.statusCode) console.log('Status Code:' + result.statusCode);
             //server is down
             server.upStatus = false;
-            //server.version = undefined;
         }
 
 
@@ -85,7 +77,7 @@ var poll = function() {
 /*
 check for polling every x milliseconds
  */
-var pollingTimer = Meteor.setInterval(poll, 5000);
+var pollingTimer = Meteor.setInterval(poll, 30000);
 
 
 
