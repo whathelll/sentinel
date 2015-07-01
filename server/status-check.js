@@ -19,13 +19,13 @@ var pollServer = function(server) {
 
     //console.log(options);
     HTTP.call(server.upStatusMethod, server.upStatusUrl, options, function (error, result) {
-        console.log(server.upStatusUrl);
+//        console.log(server.upStatusUrl);
         if (!error) {
-            console.log('Server:' + server.name);
+            console.log('---------------success Server:' + server.name);
             console.log('Status Code:' + result.statusCode);
-            console.log('Content:' + result.content);
-            if(server.lastUpdateTime)
-                console.log('Time since last update:' + (new Date() - server.lastUpdateTime));
+            //console.log('Content:' + result.content);
+//            if(server.lastUpdateTime)
+//                console.log('Time since last update:' + (new Date() - server.lastUpdateTime));
 
             //var content = JSON.parse(result.content);
 
@@ -52,8 +52,9 @@ var pollServer = function(server) {
 
 
         } else {
+            console.log('------------------------error: ' + server.serverGroup + ' ' + server.name);
             console.log(error);
-            console.log('error');
+
             if(result  && result.statusCode) console.log('Status Code:' + result.statusCode);
             //server is down
             server.upStatus = false;
