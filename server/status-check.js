@@ -13,6 +13,7 @@ poll the server that's passed in
 var pollServer = function(server) {
     var options = {};
     var errorMessage = "";
+    var originalStatus = server.upStatus;
     if(server.upStatusMethod == "POST") {
         options.headers = JSON.parse(server.upStatusPostHeader);
         options.content = server.upStatusPostData;
@@ -29,9 +30,7 @@ var pollServer = function(server) {
             if(server.upStatusUrl === server.versionUrl) {
                 var match = result.content.match(/ersion":"([a-zA-Z0-9\.]+)"/);
                 if(match && match.length >= 2) {
-                    console.log(server.version + " : " + match[1]);
-                    if(server.version !== match[1])
-                        Bus.dispatch('server-version-changed', server);
+                    if(server.version !== match[1]) Bus.dispatch('server-version-changed', server, match[1]);
                     server.version = match[1];
                 }
             }
@@ -46,15 +45,12 @@ var pollServer = function(server) {
                 //server is up
                 server.upStatus = true;
             }
-
-
         } else {
             console.log('------------------------error: ' + server.serverGroup + ' ' + server.name);
             console.log(error);
 
-            if(result  && result.statusCode) { 
-                console.log('Status Code:' + result.statusCode);
-                errorMessage = result.statusCode;
+            if(result) {
+                errorMessage = JSON.stringify(result).substr(0, 100);
             } else {
                 errorMessage = "Unknown";
             }
@@ -62,13 +58,12 @@ var pollServer = function(server) {
             server.upStatus = false;
         }
 
+        if(originalStatus !== server.upStatus) Bus.dispatch('server-status-changed', server, errorMessage);
 
         server.lastUpdateTime = new Date();
-        server.lastError = errorMessage;
         Servers.update(server._id,{$set: {
                 upStatus: server.upStatus,
-                version: server.version,
-                lastError: server.lastError}}
+                version: server.version}}
         );
 
     });

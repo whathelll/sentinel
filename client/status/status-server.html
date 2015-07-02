@@ -1,17 +1,13 @@
 <template name="statusServer">
-    <a class="list-group-item" href="{{url}}">
+    <a class="list-group-item" href="{{pathFor route='eventlog'}}">
         {{name}}
-        - <span>{{updateTime}}</span>
-        {{#unless upStatus}}
-            - <span>Error Code: {{lastError}}</span>
-        {{/unless}}
-        <span class="label upstatus {{#if upStatus}}label-success {{else}} label-danger {{/if}}">
-            {{#if upStatus}}
-                Up
-            {{else}}
-                Down
-            {{/if}}
+
+
+        <span class="label pull-right {{statusClass}}">
+            {{updateStatus}}
         </span>
-        <span class="label label-info version">{{version}}</span>
+        <span class="label label-info pull-right">{{version}}</span>
+
+        <span class="pull-right">{{updateTime}}</span>
     </a>
 </template>
