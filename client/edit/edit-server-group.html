@@ -1,4 +1,17 @@
 <template name="editServerGroup">
-    edit server group
-    {{name}}
+<h2>{{name}}</h2>
+    <form class="edit-server-group">
+	    <dl>
+	    	<dt>Name:</dt>
+	    	<dd><input type="text" name="groupName"/></dd>	
+	    </dl>
+	    <input type="submit" value="Save Server Group"/>
+    </form>
+
+    {{#each servers}}
+        {{> editServer}}
+    {{/each}}
+    {{#if this._id}}
+    	<button class='add-server'>Add New Server</button>
+    {{/if}}
 </template>

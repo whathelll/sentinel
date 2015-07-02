@@ -2,6 +2,9 @@
     <a class="list-group-item" href="{{url}}">
         {{name}}
         - <span>{{updateTime}}</span>
+        {{#unless upStatus}}
+            - <span>Error Code: {{lastError}}</span>
+        {{/unless}}
         <span class="label upstatus {{#if upStatus}}label-success {{else}} label-danger {{/if}}">
             {{#if upStatus}}
                 Up
