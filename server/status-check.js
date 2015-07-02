@@ -65,7 +65,11 @@ var pollServer = function(server) {
 
         server.lastUpdateTime = new Date();
         server.lastError = errorMessage;
-        Servers.update(server._id, {$set: {upStatus: server.upStatus, version: server.version}});
+        Servers.update(server._id,{$set: {
+                upStatus: server.upStatus,
+                version: server.version,
+                lastError: server.lastError}}
+        );
 
     });
 }
