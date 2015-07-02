@@ -2,11 +2,10 @@
 
     <div class="list-group">
         <li class="list-group-item active">
-            <a href="{{pathFor route='servergroup'}}" class="list-group-item active">
-                {{name}}
-                <span class="badge">{{totalUpDown}}</span>
-            </a>
-
+            {{name}}
+            <a class="delete-group" href="#">Delete</a>
+            <a class="edit-group" href="{{pathFor route='servergroup'}}">Edit</a>
+            <span class="badge">{{totalUpDown}}</span>
         </li>
         {{#each servers}}
             {{> statusServer}}
