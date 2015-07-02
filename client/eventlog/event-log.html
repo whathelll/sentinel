@@ -1,0 +1,16 @@
+<template name="eventLog">
+    <h2>Event Log</h2>
+    <div class="list-group">
+        {{#each eventLogs}}
+            {{>eventLogItem}}
+        {{/each}}
+    </div>
+</template>
+
+
+<template name="eventLogItem">
+    <li class="list-group-item">
+        {{formattedTimeStamp}} {{event}} {{#if message}} <p>{{message}}</p> {{/if}}
+    </li>
+</template>
+
