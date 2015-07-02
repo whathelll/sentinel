@@ -29,6 +29,9 @@ var pollServer = function(server) {
             if(server.upStatusUrl === server.versionUrl) {
                 var match = result.content.match(/ersion":"([a-zA-Z0-9\.]+)"/);
                 if(match && match.length >= 2) {
+                    console.log(server.version + " : " + match[1]);
+                    if(server.version !== match[1])
+                        Bus.dispatch('server-version-changed', server);
                     server.version = match[1];
                 }
             }
@@ -62,7 +65,7 @@ var pollServer = function(server) {
 
         server.lastUpdateTime = new Date();
         server.lastError = errorMessage;
-        Servers.update(server._id, {$set: server});
+        Servers.update(server._id, {$set: {upStatus: server.upStatus, version: server.version}});
 
     });
 }
