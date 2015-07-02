@@ -12,6 +12,7 @@ poll the server that's passed in
  */
 var pollServer = function(server) {
     var options = {};
+    var errorMessage = "";
     if(server.upStatusMethod == "POST") {
         options.headers = JSON.parse(server.upStatusPostHeader);
         options.content = server.upStatusPostData;
@@ -48,13 +49,19 @@ var pollServer = function(server) {
             console.log('------------------------error: ' + server.serverGroup + ' ' + server.name);
             console.log(error);
 
-            if(result  && result.statusCode) console.log('Status Code:' + result.statusCode);
+            if(result  && result.statusCode) { 
+                console.log('Status Code:' + result.statusCode);
+                errorMessage = result.statusCode;
+            } else {
+                errorMessage = "Unknown";
+            }
             //server is down
             server.upStatus = false;
         }
 
 
         server.lastUpdateTime = new Date();
+        server.lastError = errorMessage;
         Servers.update(server._id, {$set: server});
 
     });
