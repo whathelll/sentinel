@@ -27,18 +27,13 @@ dev test endpoints - test/api-test.js
 
 
 #To do
-- have different operations e.g. post with data and header (doesn't seem to post the body yet)
-- evaluate version with regular expression (a field on the server record)
 - set up sample data that has VE132/133
-- user accounts and subscription to server status'
-- evaluate response content rather than just look at 200 status
+- user accounts and subscription to server status
 
-- edit servers
-- add servers
-- add server groups
-
-- short circuit mechanism
-- an event bus
+- edit servers (part)
+- add servers (part)
+- add server groups (part)
+- event log (still simple)
 
 - server actions - stop/start with outputs
 - view logs?
