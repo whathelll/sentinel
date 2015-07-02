@@ -12,3 +12,4 @@ nemo64:bootstrap
 less
 jquery
 http
+sentinel:eventbus

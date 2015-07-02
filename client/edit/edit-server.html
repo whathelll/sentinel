@@ -1,3 +1,30 @@
 <template name="editServer">
-    edit server
+	<div class="list-group-item" href="{{url}}">
+		<p>Edit: {{name}}</p>
+		<p>URL: {{upStatusUrl}}</p>
+		<p>Poll Interval: {{pollInterval}}</p>
+		<p>Method: {{upStatusMethod}}</p>
+
+	    <form class="edit-server">
+		    <dl>
+		    	<dt>Name:</dt>
+		    	<dd><input type="text" name="serverName"/></dd>	
+		    </dl>
+		    <dl>
+		    	<dt>Poll interval (seconds):</dt>
+		    	<dd><input type="text" name="pollInterval"/></dd>	
+		    </dl>
+		    <dl>
+		    	<dt>URL:</dt>
+		    	<dd><input type="text" name="url"/></dd>	
+		    </dl>
+		    <dl>
+		    	<dt>Method (POST or GET):</dt>
+		    	<dd><input type="text" name="method"/></dd>	
+		    </dl>
+		    <input type="submit" value="Save Server"/>
+	    </form>
+	    <button class="delete-server">Delete Server</button>
+	    
+    </div>
 </template>

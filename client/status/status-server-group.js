@@ -13,4 +13,10 @@ Template.statusServerGroup.helpers({
         );
         return up + "/" + total;
     }
-})
+});
+
+Template.statusServerGroup.events({
+    "click .delete-group": function (event) {
+        Meteor.call('deleteServerGroup', this._id);
+    }
+});

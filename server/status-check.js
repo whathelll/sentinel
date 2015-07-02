@@ -12,29 +12,25 @@ poll the server that's passed in
  */
 var pollServer = function(server) {
     var options = {};
+    var errorMessage = "";
+    var originalStatus = server.upStatus;
     if(server.upStatusMethod == "POST") {
         options.headers = JSON.parse(server.upStatusPostHeader);
-        options.content = server.upStatusPostData;  //this seems to do nothing
+        options.content = server.upStatusPostData;
     }
 
-    //console.log(options);
     HTTP.call(server.upStatusMethod, server.upStatusUrl, options, function (error, result) {
-        console.log(server.upStatusUrl);
+//        console.log(server.upStatusUrl);
         if (!error) {
-            console.log('Server:' + server.name);
+            console.log('---------------success Server:' + server.serverGroup + ' ' + server.name);
             console.log('Status Code:' + result.statusCode);
-            console.log('Content:' + result.content);
-            if(server.lastUpdateTime)
-                console.log('Time since last update:' + (new Date() - server.lastUpdateTime));
-
-            //var content = JSON.parse(result.content);
-
-
+            //console.log('Content:' + result.content);
 
             //set the server version
             if(server.upStatusUrl === server.versionUrl) {
                 var match = result.content.match(/ersion":"([a-zA-Z0-9\.]+)"/);
                 if(match && match.length >= 2) {
+                    if(server.version !== match[1]) Bus.dispatch('server-version-changed', server, match[1]);
                     server.version = match[1];
                 }
             }
@@ -49,20 +45,26 @@ var pollServer = function(server) {
                 //server is up
                 server.upStatus = true;
             }
-
-
         } else {
+            console.log('------------------------error: ' + server.serverGroup + ' ' + server.name);
             console.log(error);
-            console.log('error');
-            if(result  && result.statusCode) console.log('Status Code:' + result.statusCode);
+
+            if(result) {
+                errorMessage = JSON.stringify(result).substr(0, 100);
+            } else {
+                errorMessage = "Unknown";
+            }
             //server is down
             server.upStatus = false;
-            //server.version = undefined;
         }
 
+        if(originalStatus !== server.upStatus) Bus.dispatch('server-status-changed', server, errorMessage);
 
         server.lastUpdateTime = new Date();
-        Servers.update(server._id, {$set: server});
+        Servers.update(server._id,{$set: {
+                upStatus: server.upStatus,
+                version: server.version}}
+        );
 
     });
 }
@@ -84,7 +86,7 @@ var poll = function() {
 /*
 check for polling every x milliseconds
  */
-var pollingTimer = Meteor.setInterval(poll, 5000);
+var pollingTimer = Meteor.setInterval(poll, 30000);
 
 
 
