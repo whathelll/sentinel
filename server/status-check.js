@@ -50,7 +50,7 @@ var pollServer = function(server) {
             console.log(error);
 
             if(result) {
-                errorMessage = JSON.stringify(result).substr(0, 100);
+                errorMessage = JSON.stringify(result).substr(0, 250);
             } else {
                 errorMessage = "Unknown";
             }
