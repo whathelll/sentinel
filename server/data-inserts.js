@@ -45,11 +45,20 @@ Meteor.methods({
 });
 
 Meteor.methods({
-    editServer: function (id, name, url, interval, method) {
+    editServer: function (id, name, url, interval, method, postHeader, postData, postRegex, versionURL) {
         console.log("Editing server: " + id);
         Servers.update(
             {_id: id},
-            {$set: {name: name, upStatusUrl: url, versionUrl: url, pollInterval: interval, upStatusMethod: method}}
+            {$set: {
+                name: name, 
+                upStatusUrl: url, 
+                versionUrl: versionURL, 
+                pollInterval: interval, 
+                upStatusMethod: method,
+                upStatusPostHeader: postHeader,
+                upStatusPostData: postData,
+                upStatusPostResultRegex: postRegex
+            }}
         );
     }
 });
