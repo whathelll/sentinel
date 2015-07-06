@@ -90,3 +90,14 @@ Router.route('/api/test/restfulUpDown', { where: 'server' })
 
 
     });
+
+Router.route('/api/test/noresponse', { where: 'server' })
+    .get(function () {
+        console.log('GET no response hit');
+        //console.log(this.request);
+        console.log('----------------------------');
+        //console.log(this.response);
+        //this.response.writeHead(200, {});
+        //this.response.end("");
+        return;
+    });
