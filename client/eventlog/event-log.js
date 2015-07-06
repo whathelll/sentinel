@@ -7,6 +7,6 @@ Template.eventLog.helpers({
 
 Template.eventLogItem.helpers({
     formattedTimeStamp: function() {
-        return this.timeStamp.toISOString().replace("T", "").replace("Z", "");
+        return this.timeStamp.toLocaleString();
     }
 })
