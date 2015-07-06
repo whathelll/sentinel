@@ -1,7 +1,9 @@
 <template name="editServerGroup">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3>{{name}}</h3>
+            {{#if name}}
+                <h3>{{name}}</h3>
+            {{else}}<h5>Add New Server Group</h5>{{/if}}
         </div>
         <div class="panel-body">
             <form class="edit-server-group form-inline">
