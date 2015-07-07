@@ -4,27 +4,40 @@
 		<p>URL: {{upStatusUrl}}</p>
 		<p>Poll Interval: {{pollInterval}}</p>
 		<p>Method: {{upStatusMethod}}</p>
+        <p>POST Header: {{upStatusPostHeader}}</p>
+        <p>POST Data: {{upStatusPostData}}</p>
+        <p>POST Result Regex: {{upStatusPostResultRegex}}</p>
+        <p>Version URL: {{versionUrl}}</p>
 
 	    <form class="edit-server">
-		    <dl>
-		    	<dt>Name:</dt>
-		    	<dd><input type="text" name="serverName"/></dd>	
-		    </dl>
-		    <dl>
-		    	<dt>Poll interval (seconds):</dt>
-		    	<dd><input type="text" name="pollInterval"/></dd>	
-		    </dl>
-		    <dl>
-		    	<dt>URL:</dt>
-		    	<dd><input type="text" name="url"/></dd>	
-		    </dl>
-		    <dl>
-		    	<dt>Method (POST or GET):</dt>
-		    	<dd><input type="text" name="method"/></dd>	
-		    </dl>
+		    <p>
+		    	Name:<input type="text" name="serverName"/>
+		    </p>
+		    <p>
+		    	Poll interval (seconds):<input type="text" name="pollInterval"/>	
+		    </p>
+		    <p>
+		    	URL:<input type="text" name="url"/>	
+		    </p>
+		    <p>
+		    	Method (POST or GET):<input type="text" name="method"/>	
+		    </p>
+		    <p>
+		    	POST Header (optional):<input type="text" name="postHeader"/>	
+		    </p>
+		    <p>
+		    	POST Data (optional):<input type="text" name="postData"/>	
+		    </p>
+		    <p>
+		    	POST Result Regex (optional):<input type="text" name="postRegex"/>	
+		    </p>
+		    <p>
+		    	Version URL:<input type="text" name="versionURL"/>
+		    </p>
 		    <input type="submit" value="Save Server"/>
 	    </form>
 	    <button class="delete-server">Delete Server</button>
 	    
     </div>
 </template>
+
