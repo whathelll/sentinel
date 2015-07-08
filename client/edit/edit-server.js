@@ -14,17 +14,14 @@ Template.editServer.events({
 		var serverName = event.target.serverName.value;
 		var pollInterval = event.target.pollInterval.value;
 		var url =  event.target.url.value;
+		var versionUrl = event.target.versionUrl.value;
 		var method = event.target.method.value;
 
 		var postHeader =  event.target.postHeader.value || "";
 		var postData = event.target.postData.value || "";
 		var postRegex = event.target.postRegex.value || "";
 
-		console.log(postData);
-		console.log(postHeader);
-		console.log(postRegex);
-
-		Meteor.call('editServer', this._id, serverName, url, pollInterval, method, postHeader, postData, postRegex);
+		Meteor.call('editServer', this._id, serverName, url, versionUrl, pollInterval, method, postHeader, postData, postRegex);
 		return false;
 	},
 	"click .delete-server": function (event) {
