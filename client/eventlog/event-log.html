@@ -10,8 +10,8 @@
 
 <template name="eventLogItem">
     <li class="list-group-item">
-        <div>
-            {{formattedTimeStamp}} <span class="{{eventClass}}">{{event}}</span>
+        <div class="{{eventClass}}">
+            {{formattedTimeStamp}} <span >{{event}}</span>
         </div>
         {{#if message}}
             <p>{{message}}</p>

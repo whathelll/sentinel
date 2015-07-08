@@ -11,11 +11,11 @@ Template.eventLogItem.helpers({
     },
     eventClass: function() {
         if(this.event == "Status changed to Up") {
-            return "text-success";
+            return "bg-success";
         } else if(this.event == "Status changed to Down") {
-            return "text-danger";
+            return "bg-danger";
         } else if(this.event == "Version Change") {
-            return "text-info";
+            return "bg-info";
         }
     }
 })
