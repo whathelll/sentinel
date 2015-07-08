@@ -20,7 +20,7 @@ var pollServer = function(server) {
     }
 
     HTTP.call(server.upStatusMethod, server.upStatusUrl, options, function (error, result) {
-//        console.log(server.upStatusUrl);
+        //console.log(server.upStatusUrl);
         if (!error) {
             console.log('---------------success Server:' + server.serverGroup + ' ' + server.name);
             console.log('Status Code:' + result.statusCode);
@@ -30,7 +30,6 @@ var pollServer = function(server) {
             if(server.upStatusUrl === server.versionUrl) {
                 var match = result.content.match(/ersion":"([a-zA-Z0-9\.]+)"/);
                 if(match && match.length >= 2) {
-                    if(server.version !== match[1]) Bus.dispatch('server-version-changed', server, match[1]);
                     server.version = match[1];
                 }
             }
@@ -58,12 +57,16 @@ var pollServer = function(server) {
             server.upStatus = false;
         }
 
-        if(originalStatus !== server.upStatus) Bus.dispatch('server-status-changed', server, errorMessage);
+        var storedServer = Servers.findOne(server._id);
+        if(storedServer.upStatus !== server.upStatus) Bus.dispatch('server-status-changed', server, errorMessage);
+        if(storedServer.version !== server.version) Bus.dispatch('server-version-changed', server, server.version);
 
         server.lastUpdateTime = new Date();
         Servers.update(server._id,{$set: {
                 upStatus: server.upStatus,
-                version: server.version}}
+                version: server.version,
+                lastUpdateTime: server.lastUpdateTime
+            }}
         );
 
     });
@@ -86,7 +89,7 @@ var poll = function() {
 /*
 check for polling every x milliseconds
  */
-var pollingTimer = Meteor.setInterval(poll, 30000);
+var pollingTimer = Meteor.setInterval(poll, 5000);
 
 
 

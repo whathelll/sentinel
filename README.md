@@ -27,13 +27,7 @@ dev test endpoints - test/api-test.js
 
 
 #To do
-- set up sample data that has VE132/133
 - user accounts and subscription to server status
-
-- edit servers (part)
-- add servers (part)
-- add server groups (part)
-- event log (still simple)
 
 - server actions - stop/start with outputs
 - view logs?
