@@ -1,43 +1,52 @@
 <template name="editServer">
-	<div class="list-group-item" href="{{url}}">
-		<p>Edit: {{name}}</p>
-		<p>URL: {{upStatusUrl}}</p>
-		<p>Poll Interval: {{pollInterval}}</p>
-		<p>Method: {{upStatusMethod}}</p>
-        <p>POST Header: {{upStatusPostHeader}}</p>
-        <p>POST Data: {{upStatusPostData}}</p>
-        <p>POST Result Regex: {{upStatusPostResultRegex}}</p>
-        <p>Version URL: {{versionUrl}}</p>
 
-	    <form class="edit-server">
-		    <p>
-		    	Name:<input type="text" name="serverName"/>
-		    </p>
-		    <p>
-		    	Poll interval (seconds):<input type="text" name="pollInterval"/>	
-		    </p>
-		    <p>
-		    	URL:<input type="text" name="url"/>	
-		    </p>
-		    <p>
-		    	Method (POST or GET):<input type="text" name="method"/>	
-		    </p>
-		    <p>
-		    	POST Header (optional):<input type="text" name="postHeader"/>	
-		    </p>
-		    <p>
-		    	POST Data (optional):<input type="text" name="postData"/>	
-		    </p>
-		    <p>
-		    	POST Result Regex (optional):<input type="text" name="postRegex"/>	
-		    </p>
-		    <p>
-		    	Version URL:<input type="text" name="versionURL"/>
-		    </p>
-		    <input type="submit" value="Save Server"/>
-	    </form>
-	    <button class="delete-server">Delete Server</button>
-	    
-    </div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Server: {{name}}
+		</div>
+
+		<div class="panel-body">
+			<form class="edit-server">
+				<div class="form-group">
+					<label >Name:</label >
+					<input type="text" class="form-control" name="serverName" value="{{name}}" placeholder="server/service name"/>
+				</div>
+				<div class="form-group">
+					<label>Poll interval (seconds):</label>
+					<input type="text" class="form-control" name="pollInterval" value="{{pollInterval}}" placeholder="no. of seconds between polls"/>
+				</div>
+				<div class="form-group">
+					<label>URL:</label>
+					<input type="text" class="form-control" name="url" value="{{upStatusUrl}}" placeholder="URL to poll"/>
+				</div>
+                <div class="form-group">
+                    <label>Version URL:</label>
+                    <input type="text" class="form-control" name="versionUrl" value="{{versionUrl}}" placeholder="URL to get version no."/>
+                </div>
+				<div class="form-group">
+					<label>Method (POST or GET):</label>
+					<select class="method form-control" name="method">
+						<option selected="{{#if equals this.upStatusMethod 'GET'}}selected{{/if}}" value="GET">GET</option>
+						<option selected="{{#if equals this.upStatusMethod 'POST'}}selected{{/if}}" value="POST">POST</option>
+					</select>
+				</div>
+
+				<div class="form-group {{#unless isShowPostComponents}}hidden{{/unless}}">
+					<label>Post Header:</label>
+					<input type="text" class="form-control" name="postHeader" value="{{upStatusPostHeader}}" placeholder="the header of a post request"/>
+				</div>
+				<div class="form-group {{#unless isShowPostComponents}}hidden{{/unless}}">
+					<label>Post Data:</label>
+					<textarea rows=10 class="form-control" name="postData" placeholder="the data of a post request">{{upStatusPostData}}</textarea>
+				</div>
+				<div class="form-group {{#unless isShowPostComponents}}hidden{{/unless}}">
+					<label>Post Result Regular Expression:</label>
+					<input type="text" class="form-control" name="postRegex" value="{{upStatusPostResultRegex}}" placeholder="regular expression to match the result with"/>
+				</div>
+
+				<input type="submit" class="btn btn-default" value="Save Server"/>
+				<button class="delete-server btn btn-default">Delete Server</button>
+			</form>
+		</div>
+	</div>
 </template>
-
