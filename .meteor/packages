@@ -13,3 +13,5 @@ less
 jquery
 http
 sentinel:eventbus
+accounts-password
+ian:accounts-ui-bootstrap-3
