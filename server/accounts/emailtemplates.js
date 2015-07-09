@@ -1,5 +1,5 @@
 Meteor.startup(function(){
-    //process.env.MAIL_URL = "smtp://user:password@smtp.gmail.com:465/";
+    process.env.mailUrl = Configuration.mailUrl;
 });
 
 
@@ -17,6 +17,7 @@ Accounts.emailTemplates.enrollAccount.text = function (user, url) {
 Accounts.emailTemplates.resetPassword.subject = function (user) {
     return "Reset password For Sentinel, " + user.profile.name;
 };
+
 Accounts.emailTemplates.resetPassword.text = function (user, url) {
     return "To reset your account, simply click the link below:\n\n"
         + url;
