@@ -79,3 +79,22 @@ Meteor.methods({
         });
     }
 });
+
+
+Meteor.methods({
+    addFavourite: function(userId, serverName) {
+        console.log('adding favourite with userId:', userId, ' serverName:', serverName);
+        Favourites.insert({
+            userId: userId,
+            serverName: serverName
+        });
+    },
+    removeFavourite: function(userId, serverName) {
+        console.log('removing favourite with userId:', userId, ' serverName:', serverName);
+        Favourites.remove({
+            userId: userId,
+            serverName: serverName
+        });
+    }
+
+})

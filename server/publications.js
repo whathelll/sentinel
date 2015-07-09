@@ -9,3 +9,8 @@ Meteor.publish('servers', function(){
 Meteor.publish('eventLogForServer', function(serverId) {
     return EventLog.find({serverId: serverId}, {sort: {timeStamp: -1}, limit: 50});
 });
+
+Meteor.publish('favourites', function(userId) {
+    console.log('******************************************************meteor user:', userId);
+    return Favourites.find({userId: userId});
+});
