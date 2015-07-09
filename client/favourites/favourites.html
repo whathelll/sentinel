@@ -1,3 +1,7 @@
 <template name="favourites">
-    <div>accounts and favourites to come</div>
+    <div class="list-group">
+        {{#each servers}}
+            {{> statusServer}}
+        {{/each}}
+    </div>
 </template>

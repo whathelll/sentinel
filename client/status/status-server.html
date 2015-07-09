@@ -1,7 +1,11 @@
 <template name="statusServer">
-    <a class="list-group-item" href="{{pathFor route='eventlog'}}">
-        {{name}} (click to view log)
-
+    <li class="list-group-item">
+        {{name}}
+        <a class="btn btn-default" href="{{pathFor route='eventlog'}}" role="button">Log</a>
+        <!-- <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-list-alt"></span></button> -->
+        {{#if currentUser}}
+            <button class="btn btn-default favourite {{#if isFavourite}}active{{/if}}" role="button">Favourite</button>
+        {{/if}}
 
         <span class="label pull-right {{statusClass}}">
             {{updateStatus}}
@@ -9,5 +13,5 @@
         <span class="label label-info pull-right">{{version}}</span>
 
         <span class="pull-right">{{updateTime}}</span>
-    </a>
+    </li>
 </template>

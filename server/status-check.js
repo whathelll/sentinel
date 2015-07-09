@@ -90,7 +90,7 @@ var poll = function() {
 /*
 check for polling every x milliseconds
  */
-var pollingTimer = Meteor.setInterval(poll, 60000);
+var pollingTimer = Meteor.setInterval(poll, Configuration.pollingLoopFrequency);
 
 
 
