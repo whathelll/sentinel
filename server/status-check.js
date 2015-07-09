@@ -58,6 +58,7 @@ var pollServer = function(server) {
         }
 
         var storedServer = Servers.findOne(server._id);
+        console.log('server upStatus:' + storedServer.upStatus + " | " + server.upStatus)
         if(storedServer.upStatus !== server.upStatus) Bus.dispatch('server-status-changed', server, errorMessage);
         if(storedServer.version !== server.version) Bus.dispatch('server-version-changed', server, server.version);
 
@@ -89,7 +90,7 @@ var poll = function() {
 /*
 check for polling every x milliseconds
  */
-var pollingTimer = Meteor.setInterval(poll, 5000);
+var pollingTimer = Meteor.setInterval(poll, 60000);
 
 
 
