@@ -1,10 +1,11 @@
 var methodChanged = new Tracker.Dependency();
-
+var method={};
 
 Template.editServer.helpers({
 	isShowPostComponents: function() {
 		methodChanged.depend();
-		return this.upStatusMethod == "POST";
+		method[this._id] = method[this._id] || this.upStatusMethod;
+		return method[this._id] == "POST";
 	}
 });
 
@@ -28,7 +29,7 @@ Template.editServer.events({
 		Meteor.call('deleteServer', this._id);
 	},
 	"change select": function (event) {
-		this.upStatusMethod = event.target.value;
+		method[this._id] = event.target.value;
 		methodChanged.changed();
 	}
 });
