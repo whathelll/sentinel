@@ -1,12 +1,12 @@
 Meteor.startup(function(){
-    process.env.mailUrl = Configuration.mailUrl;
+    process.env.MAIL_URL = "smtp://exch-smtp2.auiag.corp:25/";
 });
 
 
 Accounts.emailTemplates.siteName = "Sentinel";
 Accounts.emailTemplates.from = "Admin<william.xu@iag.com.au>";
 Accounts.emailTemplates.enrollAccount.subject = function (user) {
-    return "Welcome to Sentinel, " + user.profile.name;
+    return "Welcome to Sentinel";
 };
 Accounts.emailTemplates.enrollAccount.text = function (user, url) {
     return "You have joined the collective!"
@@ -15,7 +15,7 @@ Accounts.emailTemplates.enrollAccount.text = function (user, url) {
 };
 
 Accounts.emailTemplates.resetPassword.subject = function (user) {
-    return "Reset password For Sentinel, " + user.profile.name;
+    return "Reset password For Sentinel";
 };
 
 Accounts.emailTemplates.resetPassword.text = function (user, url) {
