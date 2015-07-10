@@ -82,18 +82,18 @@ Meteor.methods({
 
 
 Meteor.methods({
-    addFavourite: function(userId, serverName) {
-        console.log('adding favourite with userId:', userId, ' serverName:', serverName);
+    addFavourite: function(userId, serverId) {
+        console.log('adding favourite with userId:', userId, ' serverId:', serverId);
         Favourites.insert({
             userId: userId,
-            serverName: serverName
+            serverId: serverId
         });
     },
-    removeFavourite: function(userId, serverName) {
-        console.log('removing favourite with userId:', userId, ' serverName:', serverName);
+    removeFavourite: function(userId, serverId) {
+        console.log('removing favourite with userId:', userId, ' serverId:', serverId);
         Favourites.remove({
             userId: userId,
-            serverName: serverName
+            serverId: serverId
         });
     }
 
