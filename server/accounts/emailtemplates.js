@@ -4,7 +4,7 @@ Meteor.startup(function(){
 
 
 Accounts.emailTemplates.siteName = "Sentinel";
-Accounts.emailTemplates.from = "Admin<william.xu@iag.com.au>";
+Accounts.emailTemplates.from = Configuration.mailFrom;
 Accounts.emailTemplates.enrollAccount.subject = function (user) {
     return "Welcome to Sentinel";
 };
