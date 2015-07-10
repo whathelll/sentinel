@@ -1,0 +1,35 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "accounts-oauth",
+      "constraint": "1.0.0",
+      "weak": true
+    },
+    {
+      "package": "accounts-password",
+      "constraint": "1.0.0",
+      "weak": true
+    }
+  ],
+  "implies": [
+    {
+      "package": "accounts-base",
+      "constraint": ""
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "os/packages/ian_accounts-ui-bootstrap-3.js",
+      "length": 0,
+      "offset": 0,
+      "servePath": "/packages/ian_accounts-ui-bootstrap-3.js",
+      "sourceMap": "os/packages/ian_accounts-ui-bootstrap-3.js.map"
+    }
+  ]
+}
