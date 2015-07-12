@@ -11,6 +11,5 @@ Meteor.publish('eventLogForServer', function(serverId) {
 });
 
 Meteor.publish('favourites', function(userId) {
-    console.log('******************************************************meteor user:', userId);
     return Favourites.find({userId: userId});
 });
