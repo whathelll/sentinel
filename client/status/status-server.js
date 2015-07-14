@@ -12,12 +12,8 @@ Template.statusServer.helpers({
         var favourite = Favourites.findOne({userId: Meteor.userId() || "", serverId: this._id});
         return Template.instance().isFavourite = !!favourite;
     },
-    tag: function() {
-        if(Template.instance().isFavourite) {
-            return "unFavourite";
-        } else {
-            return "favourite";
-        }
+    favouriteTag: function() {
+        return Template.instance().isFavourite ? "unFavourite" : "favourite";
     }
 });
 

@@ -4,7 +4,7 @@
         <a class="btn btn-default" href="{{pathFor route='eventlog'}}" role="button">Log</a>
         <!-- <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-list-alt"></span></button> -->
         {{#if currentUser}}
-            <button class="btn btn-default favourite {{#if isFavourite}}active{{/if}}" role="button" tag="{{tag}}" tag-data="id:{{_id}}">
+            <button class="btn btn-default favourite {{#if isFavourite}}active{{/if}}" role="button" tag="{{favouriteTag}}" tag-data="id:{{_id}}">
                 Favourite
             </button>
         {{/if}}

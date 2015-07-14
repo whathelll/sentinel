@@ -1,5 +1,19 @@
 <template name="statistics">
     <div>
-        statistics
+        just a list of page views for now
+        {{#each events}}
+            {{> pageView}}
+        {{/each}}
+    </div>
+</template>
+
+
+
+
+<template name="pageView">
+    <div>{{formattedTimeStamp}} -
+        <strong>url:</strong> {{url}}
+        <strong>user:</strong> {{userId}}
+        <strong>address:</strong> {{clientAddress}}
     </div>
 </template>
