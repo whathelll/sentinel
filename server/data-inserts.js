@@ -96,5 +96,22 @@ Meteor.methods({
             serverId: serverId
         });
     }
+});
 
-})
+
+//to be called by method methods to add session information to an object
+var addSessionData = function(data) {
+    data.timeStamp = new Date();
+    data.userId = this.userId;
+    data.sessionId = this.connection.id;
+    data.clientAddress = this.connection.clientAddress;
+    data.userAgent = this.connection.httpHeaders['user-agent'];
+};
+
+
+Meteor.methods({
+    dispatch: function(eventName, data) {
+        addSessionData.call(this, data);
+        Bus.dispatch(eventName, data);
+    }
+});

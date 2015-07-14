@@ -9,11 +9,15 @@ Template.statusServer.helpers({
         return this.upStatus ? "label-success" : "label-danger";
     },
     isFavourite: function() {
-        var id = Meteor.userId() || "";
-        //console.log('id:', id, ' name:', this.name);
         var favourite = Favourites.findOne({userId: Meteor.userId() || "", serverId: this._id});
-        //console.log('favourite:', favourite);
         return Template.instance().isFavourite = !!favourite;
+    },
+    tag: function() {
+        if(Template.instance().isFavourite) {
+            return "unFavourite";
+        } else {
+            return "favourite";
+        }
     }
 });
 

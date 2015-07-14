@@ -10,7 +10,6 @@ Template.editServerGroup.events({
 
 		event.target.groupName.value = "";
 
-		return false;
 	},
 	"click .add-server": function (event) {
 		Meteor.call('addServer', this.name);
