@@ -23,7 +23,6 @@ Template.editServer.events({
 		var postRegex = event.target.postRegex.value || "";
 
 		Meteor.call('editServer', this._id, serverName, url, versionUrl, pollInterval, method, postHeader, postData, postRegex);
-		return false;
 	},
 	"click .delete-server": function (event) {
 		Meteor.call('deleteServer', this._id);

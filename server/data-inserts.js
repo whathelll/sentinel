@@ -82,19 +82,36 @@ Meteor.methods({
 
 
 Meteor.methods({
-    addFavourite: function(userId, serverName) {
-        console.log('adding favourite with userId:', userId, ' serverName:', serverName);
+    addFavourite: function(userId, serverId) {
+        console.log('adding favourite with userId:', userId, ' serverId:', serverId);
         Favourites.insert({
             userId: userId,
-            serverName: serverName
+            serverId: serverId
         });
     },
-    removeFavourite: function(userId, serverName) {
-        console.log('removing favourite with userId:', userId, ' serverName:', serverName);
+    removeFavourite: function(userId, serverId) {
+        console.log('removing favourite with userId:', userId, ' serverId:', serverId);
         Favourites.remove({
             userId: userId,
-            serverName: serverName
+            serverId: serverId
         });
     }
+});
 
-})
+
+//to be called by method methods to add session information to an object
+var addSessionData = function(data) {
+    data.timeStamp = new Date();
+    data.userId = this.userId;
+    data.sessionId = this.connection.id;
+    data.clientAddress = this.connection.clientAddress;
+    data.userAgent = this.connection.httpHeaders['user-agent'];
+};
+
+
+Meteor.methods({
+    dispatch: function(eventName, data) {
+        addSessionData.call(this, data);
+        Bus.dispatch(eventName, data);
+    }
+});
