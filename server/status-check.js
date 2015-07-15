@@ -60,7 +60,7 @@ var pollServer = function(server) {
         var storedServer = Servers.findOne(server._id);
         console.log('server upStatus:' + storedServer.upStatus + " | " + server.upStatus)
         if(storedServer.upStatus !== server.upStatus) Bus.dispatch('server-status-changed', server, errorMessage);
-        if(storedServer.version !== server.version) Bus.dispatch('server-version-changed', server, server.version);
+        if(storedServer.version !== server.version) Bus.dispatch('server-version-changed', storedServer, server.version);
 
         server.lastUpdateTime = new Date();
         Servers.update(server._id,{$set: {
