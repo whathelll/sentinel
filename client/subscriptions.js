@@ -9,6 +9,6 @@ if(Meteor.userId()) {
 
 
 
-
+Statistics = new Mongo.Collection("statistics");
 //Meteor.subscribe('eventLogPageView'); //moved to router
 //Meteor.subscribe('eventLogForServer', this.params._id); //moved to router
