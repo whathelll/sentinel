@@ -18,29 +18,42 @@ Meteor.publish('favourites', function(userId) {
 
 Meteor.publish('eventLogPageView', function() {
     return EventLog.find({type: "page-view"}, {sort: {timeStamp: -1}, limit: 50});
-})
+});
 
 
 
-// server: publish the current size of a collection
+
+
+
+
+
+// server: publish statistics
 Meteor.publish("statistics", function () {
     var self = this;
-    var count = 0;
+    var count = {};
     var initializing = true;
 
     // observeChanges only returns after the initial `added` callbacks
     // have run. Until then, we don't want to send a lot of
     // `self.changed()` messages - hence tracking the
     // `initializing` state.
-    var handle = EventLog.find({}).observeChanges({
-        added: function (id) {
-            count++;
+    var handle = EventLog.find({type: 'page-view'}).observeChanges({
+        added: function (id, eventLog) {
+            if(!count[eventLog.url]) {
+                count[eventLog.url] = 1;
+            } else {
+                count[eventLog.url]++;
+            }
+            //console.log('publish statistics added called');
+            //console.log(arguments);
             if (!initializing)
-                self.changed("statistics", "count", {count: count});
+                self.changed("statistics", "count", count);
         },
-        removed: function (id) {
-            count--;
-            self.changed("statistics", "count", {count: count});
+        removed: function (id, eventLog) {
+            //count--;
+            //event log should never have removed anyway
+            //console.log('publish statistics removed called');
+            //self.changed("statistics", "count", {count: count});
         }
         // don't care about changed
     });
@@ -49,7 +62,8 @@ Meteor.publish("statistics", function () {
     // observeChanges has returned, and mark the subscription as
     // ready.
     initializing = false;
-    self.added("statistics", "count", {count: count});
+    self.added("statistics", "count", count);
+
     self.ready();
 
     // Stop observing the cursor when client unsubs.
@@ -59,3 +73,4 @@ Meteor.publish("statistics", function () {
         handle.stop();
     });
 });
+

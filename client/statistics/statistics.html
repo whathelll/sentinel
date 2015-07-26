@@ -1,6 +1,22 @@
 <template name="statistics">
+    <h3>Page View Stats</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>URL</th>
+                <th>Page Views</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each stats}}
+                {{> statItem}}
+            {{/each}}
+        </tbody>
+    </table>
+
+
     <div>
-        just a list of page views for now
+        <h3>List Of Recent Page Views</h3>
         {{#each events}}
             {{> pageView}}
         {{/each}}
@@ -17,3 +33,13 @@
         <strong>address:</strong> {{clientAddress}}
     </div>
 </template>
+
+
+<template name="statItem">
+        <tr>
+            <th>{{url}}</th>
+            <td>{{views}}</td>
+        </tr>
+</template>
+
+
