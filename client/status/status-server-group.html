@@ -1,18 +1,22 @@
 <template name="statusServerGroup">
 
-    <div class="list-group">
-        <li class="list-group-item active">
-            {{name}}
-            <a class="btn btn-default btn-xs delete-group" href="#">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete
-            </a>
-            <a class="btn btn-default btn-xs edit-group" href="{{pathFor route='servergroup'}}">
-                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
-            </a>
-            <span class="badge">{{totalUpDown}}</span>
-        </li>
-        {{#each servers}}
-            {{> statusServer}}
-        {{/each}}
-    </div>
+    <div>{{name}}</div>
+
+
+
+    <a class="btn btn-default btn-xs delete-group" href="#">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete
+    </a>
+    <a class="btn btn-default btn-xs edit-group" href="{{pathFor route='servergroup'}}">
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
+    </a>
+    <span class="badge">{{totalUpDown}}</span>
+
+
+
+
+
+        <!--{{#each servers}}-->
+            <!--{{> statusServer}}-->
+        <!--{{/each}}-->
 </template>

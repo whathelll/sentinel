@@ -4,3 +4,7 @@ Template.registerHelper('equals',
         return value1 == value2;
     }
 );
+
+Meteor.startup(function() {
+    $('body').attr('unresolved', 'true');
+});

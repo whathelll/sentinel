@@ -1,34 +1,34 @@
 <template name="layout">
-    <div class="container">
-        <!-- Static navbar -->
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">Sentinel</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/favourites">Favourites</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/statistics">Stats</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        {{> loginButtons}}
-                    </ul>
-                </div><!--/.nav-collapse -->
 
-            </div><!--/.container-fluid -->
-        </nav>
 
-        {{>yield}}
+    <paper-drawer-panel responsive-width="640px">
+        <paper-scroll-header-panel drawer>
+            <paper-toolbar>
+                <span class="paper-font-title">Menu</span>
+            </paper-toolbar>
+            <paper-menu>
+                <paper-item><iron-icon icon="home"></iron-icon>Home</paper-item>
+                <paper-item><iron-icon icon="favorite"></iron-icon>Favourite</paper-item>
+                <paper-item><iron-icon icon="info"></iron-icon>About</paper-item>
+                <paper-item><iron-icon icon="info"></iron-icon>Info</paper-item>
+                <paper-item><iron-icon icon="star"></iron-icon>Star</paper-item>
+                <paper-item><iron-icon icon="star-border"></iron-icon>Star Border</paper-item>
+                <paper-item><iron-icon icon="trending-up"></iron-icon>Statistics</paper-item>
+            </paper-menu>
+            {{> loginButtons}}
+        </paper-scroll-header-panel>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    </div>
+        <paper-scroll-header-panel main>
+            <paper-toolbar>
+                <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+                <!-- Application name -->
+                <div class="app-name">Sentinel</div>
+
+            </paper-toolbar>
+            <div main class="container">
+                {{>yield}}
+            </div>
+        </paper-scroll-header-panel>
+    </paper-drawer-panel>
+
 </template>
